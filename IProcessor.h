@@ -15,18 +15,8 @@ class IProcessor
 {
 public:
     virtual std::string GetProcessorInfo() = 0;
-    virtual void SetProcessorInfo(std::string version, ProcessorType type, double speed)
-    {
-        Version = version;
-        Type = type;
-        Speed = speed;
-    }
+    virtual void SetProcessorInfo(std::string version, ProcessorType type, double speed) = 0;
     virtual ~IProcessor() = default;
-
-protected:
-    std::string Version;
-    ProcessorType Type;
-    double Speed;
 };
 
 // Конкретные классы AMDProcessor и IntelProcessor
@@ -37,6 +27,18 @@ class AMDProcessor : public IProcessor
             return "Processor by AMD " + Version + ", Speed:" + std::to_string(Speed) +
                     ", ProcessorType:" + 'x' + std::to_string(Type);
         }
+
+    void SetProcessorInfo(std::string version, ProcessorType type, double speed)
+    {
+        Version = version;
+        Type = type;
+        Speed = speed;
+    }
+
+private:
+    std::string Version;
+    ProcessorType Type;
+    double Speed;
 };
 
 class IntelProcessor : public IProcessor
@@ -46,6 +48,18 @@ class IntelProcessor : public IProcessor
             return "Processor by Intel " + Version + ", Speed:" + std::to_string(Speed) +
                     ", ProcessorType:" + 'x' + std::to_string(Type);
         }
+
+    void SetProcessorInfo(std::string version, ProcessorType type, double speed)
+    {
+        Version = version;
+        Type = type;
+        Speed = speed;
+    }
+
+private:
+    std::string Version;
+    ProcessorType Type;
+    double Speed;
 };
 
 // Класс компьютер включающий в себя процессор

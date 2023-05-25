@@ -15,7 +15,7 @@ int main()
     std::shared_ptr<IProcessor> amdProcessor = std::make_shared<AMDProcessor>();
 
     // Задаем информацию
-    amdProcessor->SetProcessorInfo("AMD Ryzen7", ProcessorType::x64, 5.3);
+    amdProcessor->SetProcessorInfo("Ryzen7", ProcessorType::x64, 5.3);
 
     // Регистрируем сущность - через вызов функции RegisterInstance
     container_1.RegisterInstance<IProcessor>(amdProcessor);
@@ -53,7 +53,7 @@ int main()
     container_2.RegisterInstance<IProcessor, IntelProcessor>();
 
     // Берем процессор из контейнера и устанавливаем информацию
-    container_2.GetObject<IProcessor>()->SetProcessorInfo("Intel Core i9", ProcessorType::x64, 3.8);
+    container_2.GetObject<IProcessor>()->SetProcessorInfo("Core i9", ProcessorType::x64, 3.8);
 
     // Создаем компьютер с процессором
     Computer testComputer2(container_2.GetObject<IProcessor>().get());
@@ -74,7 +74,7 @@ int main()
     std::shared_ptr<IProcessor> intelProcessor2 = container_3.GetObject<IProcessor>();
 
     // Устанавливаем информацию о процессорах
-    intelProcessor2->SetProcessorInfo("Intel Core i9", ProcessorType::x64, 3.8);
+    intelProcessor2->SetProcessorInfo("Core i9", ProcessorType::x64, 3.8);
 
     // Создаем компьютер c процессором AMD
     Computer test_computer3(intelProcessor2.get());
@@ -89,7 +89,7 @@ int main()
     std::shared_ptr<IProcessor> amdProcessor2 = container_3.GetObject<IProcessor>();
 
     // Устанавливаем информацию о процессоре
-    amdProcessor2->SetProcessorInfo("AMD Ryzen7", ProcessorType::x64, 5.3);
+    amdProcessor2->SetProcessorInfo("Ryzen7", ProcessorType::x64, 5.3);
 
     // Устанавливаем новый процессор в компьютер
     test_computer3.InstallProcessor(amdProcessor2.get());

@@ -14,23 +14,14 @@ enum ProcessorType
 class IProcessor
 {
 public:
-
-    IProcessor(){}
-
-    std::string GetProcessorInfo()
-    {
-        return "Processor by " + Version + ", Speed:" + std::to_string(Speed) + ", ProcessorType:" + 'x' + std::to_string(Type);
-    }
-
-    void SetProcessorInfo(std::string version, ProcessorType type, double speed)
+    virtual std::string GetProcessorInfo() = 0;
+    virtual void SetProcessorInfo(std::string version, ProcessorType type, double speed)
     {
         Version = version;
         Type = type;
         Speed = speed;
     }
-
     virtual ~IProcessor() = default;
-
 
 protected:
     std::string Version;
@@ -39,8 +30,23 @@ protected:
 };
 
 // Конкретные классы AMDProcessor и IntelProcessor
-class AMDProcessor : public IProcessor{};
-class IntelProcessor : public IProcessor {};
+class AMDProcessor : public IProcessor
+{
+    std::string GetProcessorInfo()
+        {
+            return "Processor by AMD " + Version + ", Speed:" + std::to_string(Speed) +
+                    ", ProcessorType:" + 'x' + std::to_string(Type);
+        }
+};
+
+class IntelProcessor : public IProcessor
+{
+    std::string GetProcessorInfo()
+        {
+            return "Processor by Intel " + Version + ", Speed:" + std::to_string(Speed) +
+                    ", ProcessorType:" + 'x' + std::to_string(Type);
+        }
+};
 
 // Класс компьютер включающий в себя процессор
 class Computer
